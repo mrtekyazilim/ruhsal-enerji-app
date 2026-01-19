@@ -29,7 +29,7 @@ export const login = async (req: Request, res: Response) => {
     isAdmin: user.isAdmin,
   });
 
-  res.json({
+  return res.json({
     token,
     user: {
       id: user._id,
@@ -69,7 +69,7 @@ export const adminLogin = async (req: Request, res: Response) => {
     isAdmin: true,
   });
 
-  res.json({
+  return res.json({
     token,
     user: {
       id: admin._id,

@@ -45,11 +45,13 @@ export const adminGetProducts = asyncHandler(async (_req: Request, res: Response
 
 // Admin: create
 export const createProduct = asyncHandler(async (req: Request, res: Response) => {
-  const { title, description, price, categoryId, images, isActive } = req.body;
+  const { title, description, price, currency, stock, categoryId, images, isActive } = req.body;
 
-  if (!title || price === undefined || !categoryId) {
+  console.log("CREATE PRODUCT PAYLOAD =>", { title, description, price, currency, stock, categoryId, images, isActive });
+
+  if (!title || price === undefined || !categoryId || stock === undefined) {
     res.status(400);
-    throw new Error("title, price, categoryId required");
+    throw new Error("title, price, stock, categoryId required");
   }
 
   const category = await Category.findById(categoryId);
@@ -71,10 +73,17 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
     slug,
     description: description || "",
     price: Number(price),
+    currency: currency || "TRY",
+    stock: Number(stock),
     categoryId,
     images: Array.isArray(images) ? images : [],
     isActive: typeof isActive === "boolean" ? isActive : true,
   });
+
+  // Populate category info
+  await product.populate("categoryId", "name slug");
+
+  console.log("PRODUCT BEFORE RESPONSE =>", product.toObject());
 
   res.status(201).json(product);
 });
@@ -82,7 +91,7 @@ export const createProduct = asyncHandler(async (req: Request, res: Response) =>
 // Admin: update
 export const updateProduct = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { title, description, price, categoryId, images, isActive } = req.body;
+  const { title, description, price, currency, stock, categoryId, images, isActive } = req.body;
 
   const product = await Product.findById(id);
   if (!product) {
@@ -104,6 +113,8 @@ export const updateProduct = asyncHandler(async (req: Request, res: Response) =>
 
   if (typeof description === "string") product.description = description;
   if (price !== undefined) product.price = Number(price);
+  if (currency !== undefined) product.currency = currency;
+  if (stock !== undefined) product.stock = Number(stock);
 
   if (categoryId) {
     const category = await Category.findById(categoryId);
@@ -118,6 +129,10 @@ export const updateProduct = asyncHandler(async (req: Request, res: Response) =>
   if (typeof isActive === "boolean") product.isActive = isActive;
 
   await product.save();
+  
+  // Populate category info
+  await product.populate("categoryId", "name slug");
+  
   res.json(product);
 });
 

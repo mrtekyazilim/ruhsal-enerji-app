@@ -5,6 +5,8 @@ export interface IProduct extends Document {
   slug: string;
   description: string;
   price: number;
+  currency: string;
+  stock: number;
   categoryId: mongoose.Types.ObjectId;
   images: string[];
   isActive: boolean;
@@ -16,6 +18,8 @@ const ProductSchema = new Schema<IProduct>(
     slug: { type: String, required: true, trim: true, unique: true },
     description: { type: String, default: "" },
     price: { type: Number, required: true, min: 0 },
+    currency: { type: String, default: "TRY", enum: ["TRY", "USD", "EUR"] },
+    stock: { type: Number, required: true, default: 0, min: 0 },
     categoryId: { type: Schema.Types.ObjectId, ref: "Category", required: true },
     images: { type: [String], default: [] },
     isActive: { type: Boolean, default: true },

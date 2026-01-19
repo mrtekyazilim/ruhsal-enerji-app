@@ -4,6 +4,8 @@ export const createProductSchema = z.object({
   title: z.string().min(2, "Title is required"),
   description: z.string().optional(),
   price: z.number().nonnegative("Price must be >= 0"),
+  currency: z.enum(["TRY", "USD", "EUR"]).default("TRY"),
+  stock: z.number().int().nonnegative("Stock must be >= 0"),
   categoryId: z.string().min(1, "categoryId is required"),
   images: z.array(z.string()).optional(),
   isActive: z.boolean().optional(),
