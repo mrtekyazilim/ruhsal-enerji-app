@@ -3,10 +3,11 @@ import ProtectedRoute from "@/auth/ProtectedRoute"
 import AdminLayout from "@/layouts/AdminLayout"
 import Login from "@/pages/Login"
 import Dashboard from "@/pages/Dashboard"
+import Categories from "@/pages/Categories"
+import Products from "@/pages/Products"
+import Consultants from "@/pages/Consultants"
 
-function Placeholder({ title }: { title: string }) {
-  return <div className="text-xl font-semibold">{title}</div>
-}
+
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -17,8 +18,9 @@ const router = createBrowserRouter([
         element: <AdminLayout />,
         children: [
           { path: "/", element: <Dashboard /> },
-          { path: "/categories", element: <Placeholder title="Categories (yakında)" /> },
-          { path: "/products", element: <Placeholder title="Products (yakında)" /> },
+          { path: "/categories", element: <Categories /> },
+          { path: "/products", element: <Products /> },
+          { path: "/consultants", element: <Consultants /> },
         ],
       },
     ],

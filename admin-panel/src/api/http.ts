@@ -16,9 +16,12 @@ http.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err?.response?.status === 401) {
-      logout()
-      // sayfayı login'e döndürmek için basit yol:
-      window.location.href = "/login"
+      // Login sayfasında 401 hatası normal, sayfayı redirect etme
+      const isLoginPage = window.location.pathname === "/login"
+      if (!isLoginPage) {
+        logout()
+        window.location.href = "/login"
+      }
     }
     return Promise.reject(err)
   }
