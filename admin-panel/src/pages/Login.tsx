@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { setToken } from "@/auth/auth"
 import { http } from "@/api/http"
-import { Sparkles, MoonStar, Eye, Orbit, ScrollText } from "lucide-react"
+import { Sparkles, MoonStar, Eye, Orbit, ScrollText, Moon, Heart, Flame, Wand2 } from "lucide-react"
+import { ThemeToggle } from "@/components/ThemeToggle"
 
 function Feature({
   icon,
@@ -17,7 +18,7 @@ function Feature({
   desc: string
 }) {
   return (
-    <div className="flex gap-4 items-start rounded-2xl px-4 py-3 bg-white/5 border border-white/10">
+    <div className="flex gap-4 items-start rounded-2xl px-4 py-3 bg-white/5 border border-white/10 transition-colors duration-300">
       <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
         {icon}
       </div>
@@ -59,18 +60,26 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center px-4 py-10 overflow-hidden">
-      {/* arka plan aura */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(900px_500px_at_15%_10%,rgba(168,85,247,0.18),transparent_60%),radial-gradient(800px_450px_at_85%_25%,rgba(236,72,153,0.12),transparent_58%),radial-gradient(900px_600px_at_50%_90%,rgba(34,211,238,0.10),transparent_55%),linear-gradient(180deg,#050613,#0a0b1f)]" />
-      {/* yıldız tozu */}
-      <div className="absolute inset-0 -z-10 opacity-30 bg-[radial-gradient(2px_2px_at_20px_30px,rgba(255,255,255,0.22),transparent_40%),radial-gradient(1px_1px_at_120px_80px,rgba(255,255,255,0.18),transparent_40%),radial-gradient(1px_1px_at_220px_40px,rgba(255,255,255,0.14),transparent_40%),radial-gradient(2px_2px_at_320px_120px,rgba(255,255,255,0.10),transparent_40%)] bg-[length:360px_180px]" />
+    <div className="min-h-screen relative flex items-center justify-center px-4 py-10 overflow-hidden dark:bg-slate-950 bg-white transition-colors duration-300">
+      {/* arka plan aura - dark mode */}
+      <div className="absolute inset-0 -z-10 hidden dark:block bg-[radial-gradient(900px_500px_at_15%_10%,rgba(168,85,247,0.18),transparent_60%),radial-gradient(800px_450px_at_85%_25%,rgba(236,72,153,0.12),transparent_58%),radial-gradient(900px_600px_at_50%_90%,rgba(34,211,238,0.10),transparent_55%),linear-gradient(180deg,#050613,#0a0b1f)]" />
+      {/* yıldız tozu - dark mode */}
+      <div className="absolute inset-0 -z-10 hidden dark:block opacity-30 bg-[radial-gradient(2px_2px_at_20px_30px,rgba(255,255,255,0.22),transparent_40%),radial-gradient(1px_1px_at_120px_80px,rgba(255,255,255,0.18),transparent_40%),radial-gradient(1px_1px_at_220px_40px,rgba(255,255,255,0.14),transparent_40%),radial-gradient(2px_2px_at_320px_120px,rgba(255,255,255,0.10),transparent_40%)] bg-[length:360px_180px]" />
 
-      <Card className="w-full max-w-6xl overflow-hidden rounded-[28px] border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_40px_120px_rgba(0,0,0,0.60)]">
-        <div className="grid grid-cols-1 md:grid-cols-[440px_1fr]">
+      {/* arka plan light mode */}
+      <div className="absolute inset-0 -z-10 dark:hidden block bg-gradient-to-br from-purple-50 via-white to-indigo-50" />
+      <div className="absolute inset-0 -z-10 dark:hidden block opacity-25 bg-[radial-gradient(900px_500px_at_15%_10%,rgba(168,85,247,0.12),transparent_60%),radial-gradient(800px_450px_at_85%_25%,rgba(129,140,248,0.08),transparent_58%)]" />
+
+      <Card className="w-full max-w-3xl md:max-w-5xl overflow-visible rounded-[40px] border-purple-200/50 dark:border-white/10 bg-white dark:bg-white/5 backdrop-blur-xl dark:shadow-[0_40px_120px_rgba(0,0,0,0.60)] shadow-2xl dark:border-slate-700/50 dark:bg-slate-900/30 transition-colors duration-300 relative border">
+        {/* Tema Toggle - Sağ Üst */}
+        <div className="absolute top-6 right-6 z-20">
+          <ThemeToggle />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-0">
           {/* SOL PANEL */}
-          <div className="relative p-10 bg-gradient-to-b from-fuchsia-700/35 via-purple-700/25 to-cyan-500/15">
+          <div className="hidden md:flex relative p-10 bg-gradient-to-b dark:from-fuchsia-700/35 dark:via-purple-700/25 dark:to-cyan-500/15 from-purple-700 via-purple-800 to-indigo-800 transition-colors duration-300 rounded-l-[40px] flex-col">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full border border-white/25 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-full border border-white/25 flex items-center justify-center bg-white/10">
                 <Sparkles className="w-5 h-5 text-white/90" />
               </div>
               <div>
@@ -115,12 +124,12 @@ export default function Login() {
           </div>
 
           {/* SAĞ PANEL: FORM */}
-          <div className="p-10 md:p-12 bg-[rgba(18,16,36,0.72)]">
+          <div className="p-10 md:p-12 md:rounded-r-[40px] rounded-[40px] dark:bg-[rgba(18,16,36,0.72)] bg-white transition-colors duration-300 min-h-[480px] md:min-h-auto flex flex-col justify-center">
             <CardHeader className="p-0">
-              <CardTitle className="text-center text-4xl font-extrabold text-white">
+              <CardTitle className="text-center text-4xl font-extrabold text-purple-700 dark:text-white transition-colors duration-300">
                 Yönetici Girişi
               </CardTitle>
-              <p className="text-center mt-2 text-white/60">
+              <p className="text-center mt-2 text-slate-600 dark:text-white/60 transition-colors duration-300">
                 Yönetim paneline erişmek için giriş yapın
               </p>
             </CardHeader>
@@ -133,8 +142,8 @@ export default function Login() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   autoComplete="username"
-                  className="h-12 rounded-xl bg-white/10 border-white/10 text-white placeholder:text-white/40
-                             focus-visible:ring-4 focus-visible:ring-purple-500/30"
+                  className="h-12 rounded-xl dark:bg-white/10 dark:border-white/10 dark:text-white dark:placeholder:text-white/40 bg-purple-50 border border-purple-200 text-slate-900 placeholder:text-slate-500
+                             focus-visible:ring-4 focus-visible:ring-purple-400/30 transition-colors duration-300"
                 />
                 <Input
                   name="password"
@@ -143,20 +152,20 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
-                  className="h-12 rounded-xl bg-white/10 border-white/10 text-white placeholder:text-white/40
-                             focus-visible:ring-4 focus-visible:ring-purple-500/30"
+                  className="h-12 rounded-xl dark:bg-white/10 dark:border-white/10 dark:text-white dark:placeholder:text-white/40 bg-purple-50 border border-purple-200 text-slate-900 placeholder:text-slate-500
+                             focus-visible:ring-4 focus-visible:ring-purple-400/30 transition-colors duration-300"
                 />
 
                 {err && (
-                  <div className="p-4 rounded-xl border border-pink-500/25 bg-pink-500/10">
+                  <div className="p-4 rounded-xl dark:border dark:border-pink-500/25 dark:bg-pink-500/10 border border-pink-300 bg-pink-50 transition-colors duration-300">
                     <div className="flex items-center justify-between">
-                      <div className="text-sm font-semibold text-white/90">
+                      <div className="text-sm font-semibold text-pink-900 dark:text-white/90">
                         Giriş başarısız
                       </div>
                       <button
                         type="button"
                         onClick={() => setErr(null)}
-                        className="text-xs text-pink-200 underline"
+                        className="text-xs dark:text-pink-200 dark:underline text-pink-700 underline"
                       >
                         Kapat
                       </button>
@@ -175,10 +184,16 @@ export default function Login() {
                   {loading ? "Giriş..." : "Giriş Yap"}
                 </Button>
 
-                <div className="text-center text-xs text-white/45 mt-1">
+                <div className="text-center text-xs text-white/45 dark:text-white/45 text-slate-500 transition-colors duration-300 mt-1">
                   “Düzen, enerjiyi taşır.”
                 </div>
-              </form>
+                {/* MOBILE ICONS ONLY */}
+                <div className="md:hidden flex justify-center gap-4 mt-6">
+                  <Moon className="w-6 h-6 text-purple-600 dark:text-cyan-400" />
+                  <Eye className="w-6 h-6 text-purple-600 dark:text-cyan-400" />
+                  <Heart className="w-6 h-6 text-purple-600 dark:text-cyan-400" />
+                  <Sparkles className="w-6 h-6 text-purple-600 dark:text-cyan-400" />
+                </div>              </form>
             </CardContent>
           </div>
         </div>

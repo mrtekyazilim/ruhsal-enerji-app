@@ -120,9 +120,9 @@ export default function ConsultantModal({ open, initial, onClose, onDone }: Cons
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="border-white/10 bg-white/10 backdrop-blur-xl max-w-md">
+      <DialogContent className="rounded-3xl md:rounded-2xl border-purple-200/40 dark:border-white/10 bg-white dark:bg-[#0f1026] max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-white">
+          <DialogTitle className="text-slate-900 dark:text-white">
             {initial ? "Danışmanı Düzenle" : "Yeni Danışman"}
           </DialogTitle>
           <DialogDescription className="hidden">
@@ -131,7 +131,7 @@ export default function ConsultantModal({ open, initial, onClose, onDone }: Cons
         </DialogHeader>
 
         {err && (
-          <div className="rounded-lg border border-red-500/25 bg-red-500/10 p-3 text-sm text-red-200 whitespace-pre-wrap">
+          <div className="rounded-lg border border-red-500/25 bg-red-500/10 p-3 text-sm text-red-600 dark:text-red-200 whitespace-pre-wrap">
             {err}
           </div>
         )}
@@ -140,11 +140,11 @@ export default function ConsultantModal({ open, initial, onClose, onDone }: Cons
           {/* Avatar Preview */}
           <div className="flex justify-center mb-4">
             <div className="relative">
-              <div className="h-24 w-24 rounded-2xl border-2 border-dashed border-white/20 bg-white/5 flex items-center justify-center overflow-hidden">
+              <div className="h-24 w-24 rounded-2xl border-2 border-dashed border-purple-200/40 dark:border-white/20 bg-purple-50 dark:bg-white/5 flex items-center justify-center overflow-hidden">
                 {avatarPreview ? (
                   <img src={avatarPreview} alt="Avatar preview" className="h-full w-full object-cover" />
                 ) : (
-                  <div className="text-white/40 text-center">
+                  <div className="text-slate-400 dark:text-white/40 text-center">
                     <div className="text-3xl mb-1">📸</div>
                     <div className="text-xs">Resim yok</div>
                   </div>
@@ -169,67 +169,67 @@ export default function ConsultantModal({ open, initial, onClose, onDone }: Cons
           />
 
           <div>
-            <label className="block text-sm text-white/70 mb-1">Ad *</label>
+            <label className="block text-sm text-slate-600 dark:text-white/60 mb-1">Ad *</label>
             <Input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Danışman adı"
-              className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+              className="border-purple-200 dark:border-white/10 bg-purple-50 dark:bg-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/40"
               disabled={loading}
             />
           </div>
 
           <div>
-            <label className="block text-sm text-white/70 mb-1">Ünvan</label>
+            <label className="block text-sm text-slate-600 dark:text-white/60 mb-1">Ünvan</label>
             <Input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="örn: Tarot Uzmanı"
-              className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+              className="border-purple-200 dark:border-white/10 bg-purple-50 dark:bg-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/40"
               disabled={loading}
             />
           </div>
 
           <div>
-            <label className="block text-sm text-white/70 mb-1">Telefon</label>
+            <label className="block text-sm text-slate-600 dark:text-white/60 mb-1">Telefon</label>
             <Input
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+90 5XX XXX XXXX"
-              className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+              className="border-purple-200 dark:border-white/10 bg-purple-50 dark:bg-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/40"
               disabled={loading}
             />
           </div>
 
           <div>
-            <label className="block text-sm text-white/70 mb-1">Email</label>
+            <label className="block text-sm text-slate-600 dark:text-white/60 mb-1">Email</label>
             <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="email@example.com"
-              className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+              className="border-purple-200 dark:border-white/10 bg-purple-50 dark:bg-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/40"
               disabled={loading}
             />
           </div>
 
           <div>
-            <label className="block text-sm text-white/70 mb-1">Instagram</label>
+            <label className="block text-sm text-slate-600 dark:text-white/60 mb-1">Instagram</label>
             <Input
               type="text"
               value={instagram}
               onChange={(e) => setInstagram(e.target.value)}
               placeholder="@instagram_handle"
-              className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+              className="border-purple-200 dark:border-white/10 bg-purple-50 dark:bg-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/40"
               disabled={loading}
             />
           </div>
 
           <div>
-            <label className="block text-sm text-white/70 mb-1">Hakkında</label>
+            <label className="block text-sm text-slate-600 dark:text-white/60 mb-1">Hakkında</label>
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value)}
@@ -240,14 +240,14 @@ export default function ConsultantModal({ open, initial, onClose, onDone }: Cons
                 }
               }}
               placeholder="Danışman hakkında bilgi"
-              className="w-full rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-white/40 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+              className="w-full rounded-lg border border-purple-200 dark:border-white/10 bg-purple-50 dark:bg-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-white/40 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               disabled={loading}
               rows={3}
             />
           </div>
 
           <div className="flex items-center justify-between">
-            <label className="text-sm text-white/70">
+            <label className="text-sm text-slate-600 dark:text-white/60">
               Aktif Durumu
             </label>
             <button
@@ -257,7 +257,7 @@ export default function ConsultantModal({ open, initial, onClose, onDone }: Cons
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border ${
                 active
                   ? "bg-gradient-to-r from-purple-500 to-cyan-400 border-transparent"
-                  : "bg-white/5 border-white/20"
+                  : "bg-slate-200 dark:bg-white/5 border-slate-300 dark:border-white/20"
               }`}
             >
               <span
@@ -271,8 +271,7 @@ export default function ConsultantModal({ open, initial, onClose, onDone }: Cons
           <div className="flex gap-2 pt-4">
             <Button
               type="button"
-              variant="outline"
-              className="flex-1 border-white/10 text-white"
+              className="flex-1 border-2 border-slate-300 dark:border-white/20 text-slate-900 dark:text-white bg-slate-50 dark:bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 rounded-xl hover:scale-95 hover:shadow-lg transition-all duration-200"
               onClick={handleClose}
               disabled={loading}
             >
@@ -280,7 +279,7 @@ export default function ConsultantModal({ open, initial, onClose, onDone }: Cons
             </Button>
             <Button
               type="submit"
-              className="flex-1 bg-gradient-to-r from-purple-500 to-cyan-400 text-white"
+              className="flex-1 bg-gradient-to-r from-purple-500 to-cyan-400 text-white rounded-xl hover:shadow-lg hover:scale-95 transition-all duration-200"
               disabled={loading}
             >
               {loading ? "Kaydediliyor..." : "Kaydet"}

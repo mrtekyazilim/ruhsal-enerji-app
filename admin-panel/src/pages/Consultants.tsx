@@ -93,12 +93,12 @@ export default function Consultants() {
         </div>
       )}
 
-      <Card className="border-white/10 bg-white/5 backdrop-blur-xl">
+      <Card className="border-purple-200/30 dark:border-white/10 bg-white dark:bg-white/5 backdrop-blur-xl">
         <CardHeader className="flex-row items-center justify-between">
-          <CardTitle className="text-white">Danışman Listesi</CardTitle>
+          <CardTitle className="text-slate-900 dark:text-white">Danışman Listesi</CardTitle>
           <Button
             variant="ghost"
-            className="text-white/70 hover:text-white disabled:opacity-50"
+            className="text-slate-700 dark:text-white/70 hover:text-slate-900 dark:hover:text-white disabled:opacity-50"
             onClick={fetchConsultants}
             disabled={refreshing}
           >
@@ -109,28 +109,31 @@ export default function Consultants() {
 
         <CardContent className="p-0">
           {loading ? (
-            <div className="p-6 text-white/60 text-sm">Yükleniyor...</div>
+            <div className="p-6 text-slate-700 dark:text-white/60 text-sm">Yükleniyor...</div>
           ) : rows.length === 0 ? (
-            <div className="p-6 text-white/60 text-sm">
+            <div className="p-6 text-slate-700 dark:text-white/60 text-sm">
               Henüz danışman yok. “Yeni Danışman” ile ekleyebilirsin.
             </div>
           ) : (
-            <table className="w-full text-sm">
-              <thead className="border-b border-white/10 text-white/60">
+            <>
+              {/* Desktop view */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full text-sm">
+              <thead className="border-b border-purple-200/30 dark:border-white/10 text-slate-700 dark:text-white/60">
                 <tr>
-                  <th className="px-4 py-3 text-left">Resim</th>
-                  <th className="px-4 py-3 text-left">Ad</th>
-                  <th className="px-4 py-3 text-left">Ünvan</th>
-                  <th className="px-4 py-3 text-left">İletişim</th>
-                  <th className="px-4 py-3 text-left">Durum</th>
-                  <th className="px-4 py-3 text-right">İşlemler</th>
+                  <th className="px-4 py-3 text-left whitespace-nowrap">Resim</th>
+                  <th className="px-4 py-3 text-left whitespace-nowrap">Ad</th>
+                  <th className="px-4 py-3 text-left whitespace-nowrap">Ünvan</th>
+                  <th className="px-4 py-3 text-left whitespace-nowrap">İletişim</th>
+                  <th className="px-4 py-3 text-left whitespace-nowrap">Durum</th>
+                  <th className="px-4 py-3 text-right whitespace-nowrap">İşlemler</th>
                 </tr>
               </thead>
               <tbody>
                 {rows.map((c) => (
-                  <tr key={c._id} className="border-b border-white/5 hover:bg-white/5 transition">
+                  <tr key={c._id} className="border-b border-purple-200/20 dark:border-white/5 hover:bg-purple-50 dark:hover:bg-white/5 transition">
                     <td className="px-4 py-3">
-                      <div className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 overflow-hidden flex items-center justify-center">
+                      <div className="h-10 w-10 rounded-xl border border-purple-300 dark:border-white/10 bg-purple-50 dark:bg-white/5 overflow-hidden flex items-center justify-center">
                         {c.avatarUrl ? (
                           <img src={c.avatarUrl} alt={c.name} className="h-full w-full object-cover" />
                         ) : (
@@ -138,9 +141,9 @@ export default function Consultants() {
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-white font-semibold">{c.name}</td>
-                    <td className="px-4 py-3 text-white/70">{c.title ?? "—"}</td>
-                    <td className="px-4 py-3 text-white/60">
+                    <td className="px-4 py-3 text-slate-900 dark:text-white font-semibold">{c.name}</td>
+                    <td className="px-4 py-3 text-slate-700 dark:text-white/70">{c.title ?? "—"}</td>
+                    <td className="px-4 py-3 text-slate-700 dark:text-white/60">
                       {c.phone || c.email || "—"}
                     </td>
                     <td className="px-4 py-3">
@@ -168,11 +171,11 @@ export default function Consultants() {
                         className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors border ${
                           c.active
                             ? "bg-gradient-to-r from-purple-500 to-cyan-400 border-transparent"
-                            : "bg-white/5 border-white/20"
+                            : "bg-slate-200 dark:bg-white/5 border-slate-300 dark:border-white/20"
                         }`}
                       >
                         <span
-                          className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                          className={`inline-block h-5 w-5 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${
                             c.active ? "translate-x-5" : "translate-x-0.5"
                           }`}
                         />
@@ -183,7 +186,7 @@ export default function Consultants() {
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="text-white/70 hover:text-white"
+                          className="text-slate-700 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"
                           onClick={() => {
                             setSelected(c)
                             setEditOpen(true)
@@ -207,7 +210,72 @@ export default function Consultants() {
                   </tr>
                 ))}
               </tbody>
-            </table>
+              </table>
+              </div>
+
+              {/* Mobile view */}
+              <div className="md:hidden space-y-3 p-4">
+                {rows.map((c) => (
+                  <div
+                    key={c._id}
+                    className="p-4 rounded-xl border border-purple-200/30 dark:border-white/10 bg-purple-50 dark:bg-white/5 hover:bg-purple-100 dark:hover:bg-white/10 transition cursor-pointer"
+                    onClick={() => {
+                      setSelected(c)
+                      setEditOpen(true)
+                    }}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-start gap-3 flex-1 min-w-0">
+                        <div className="h-10 w-10 rounded-xl border border-purple-300 dark:border-white/10 bg-purple-50 dark:bg-white/5 overflow-hidden flex items-center justify-center flex-shrink-0">
+                          {c.avatarUrl ? (
+                            <img src={c.avatarUrl} alt={c.name} className="h-full w-full object-cover" />
+                          ) : (
+                            <span className="text-lg">👤</span>
+                          )}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="font-semibold text-slate-900 dark:text-white truncate">{c.name}</div>
+                          <div className="text-xs text-slate-600 dark:text-white/60 truncate">{c.title ?? "—"}</div>
+                          <div className="text-xs text-slate-600 dark:text-white/60 mt-1">{c.phone || c.email || "—"}</div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelected(c)
+                            setEditOpen(true)
+                          }}
+                          className="p-1.5 hover:bg-purple-200 dark:hover:bg-white/10 rounded-lg transition"
+                        >
+                          <Pencil className="h-4 w-4 text-slate-700 dark:text-white/70" />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setDelTarget(c)
+                            setDelOpen(true)
+                          }}
+                          className="p-1.5 hover:bg-red-100 dark:hover:bg-red-500/20 rounded-lg transition"
+                        >
+                          <Trash2 className="h-4 w-4 text-red-500 dark:text-red-400" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="mt-3 flex items-center justify-between border-t border-purple-200/30 dark:border-white/10 pt-3">
+                      <span className="text-xs text-slate-600 dark:text-white/60">Durum:</span>
+                      <span className={`text-xs font-semibold ${
+                        c.active
+                          ? "text-purple-600 dark:text-cyan-400"
+                          : "text-slate-500 dark:text-white/50"
+                      }`}>
+                        {c.active ? "✓ Aktif" : "○ Pasif"}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </CardContent>
       </Card>

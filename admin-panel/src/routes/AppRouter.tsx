@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { ThemeProvider } from "@/contexts/ThemeContext"
 import ProtectedRoute from "@/auth/ProtectedRoute"
 import AdminLayout from "@/layouts/AdminLayout"
 import Login from "@/pages/Login"
@@ -6,8 +7,6 @@ import Dashboard from "@/pages/Dashboard"
 import Categories from "@/pages/Categories"
 import Products from "@/pages/Products"
 import Consultants from "@/pages/Consultants"
-
-
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -28,5 +27,9 @@ const router = createBrowserRouter([
 ])
 
 export default function AppRouter() {
-  return <RouterProvider router={router} />
+  return (
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  )
 }

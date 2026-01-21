@@ -92,13 +92,13 @@ export default function Products() {
       )}
 
       {/* tablo */}
-      <Card className="border-white/10 bg-white/5 backdrop-blur-xl">
+      <Card className="border-purple-200/30 dark:border-white/10 bg-white dark:bg-white/5 backdrop-blur-xl">
         <CardHeader className="flex-row items-center justify-between">
-          <CardTitle className="text-white">Ürün Listesi</CardTitle>
+          <CardTitle className="text-slate-900 dark:text-white">Ürün Listesi</CardTitle>
 
           <Button
             variant="ghost"
-            className="text-white/70 hover:text-white disabled:opacity-50"
+            className="text-slate-700 dark:text-white/70 hover:text-slate-900 dark:hover:text-white disabled:opacity-50"
             onClick={fetchProducts}
             disabled={refreshing}
           >
@@ -109,24 +109,27 @@ export default function Products() {
 
         <CardContent className="p-0">
           {loading ? (
-            <div className="p-6 text-white/60 text-sm">Yükleniyor...</div>
+            <div className="p-6 text-slate-700 dark:text-white/60 text-sm">Yükleniyor...</div>
           ) : rows.length === 0 ? (
-            <div className="p-6 text-white/60 text-sm">
+            <div className="p-6 text-slate-700 dark:text-white/60 text-sm">
               Henüz ürün yok. “Yeni Ürün” ile ekleyebilirsin.
             </div>
           ) : (
-            <table className="w-full text-sm">
-              <thead className="border-b border-white/10 text-white/60">
-                <tr>
-                  <th className="px-4 py-3 text-left">Başlık</th>
-                  <th className="px-4 py-3 text-left">Slug</th>
-                  <th className="px-4 py-3 text-left">Kategori</th>
-                  <th className="px-4 py-3 text-right">Fiyat</th>
-                  <th className="px-4 py-3 text-right">Stok</th>
-                  <th className="px-4 py-3 text-right">İşlemler</th>
-                </tr>
-              </thead>
-              <tbody>
+            <>
+              {/* Desktop view */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full text-sm">
+                <thead className="border-b border-purple-200/30 dark:border-white/10 text-slate-700 dark:text-white/60">
+                  <tr>
+                    <th className="px-4 py-3 text-left whitespace-nowrap">Başlık</th>
+                    <th className="px-4 py-3 text-left whitespace-nowrap">Slug</th>
+                    <th className="px-4 py-3 text-left whitespace-nowrap">Kategori</th>
+                    <th className="px-4 py-3 text-right whitespace-nowrap">Fiyat</th>
+                    <th className="px-4 py-3 text-right whitespace-nowrap">Stok</th>
+                    <th className="px-4 py-3 text-right whitespace-nowrap">İşlemler</th>
+                  </tr>
+                </thead>
+                <tbody>
                 {rows.map((p) => {
                   const catName =
                     typeof p.categoryId === "string"
@@ -136,21 +139,21 @@ export default function Products() {
                   return (
                     <tr
                       key={p._id}
-                      className="border-b border-white/5 hover:bg-white/5 transition"
+                      className="border-b border-purple-200/20 dark:border-white/5 hover:bg-purple-50 dark:hover:bg-white/5 transition"
                     >
-                      <td className="px-4 py-3 text-white font-semibold">
+                      <td className="px-4 py-3 text-slate-900 dark:text-white font-semibold">
                         {p.title}
                       </td>
-                      <td className="px-4 py-3 text-white/60">{p.slug}</td>
-                      <td className="px-4 py-3 text-white/70">{catName}</td>
-                      <td className="px-4 py-3 text-right text-white">{p.price?.toFixed(2)} {p.currency || "TRY"}</td>
-                      <td className="px-4 py-3 text-right text-white">{p.stock}</td>
+                      <td className="px-4 py-3 text-slate-700 dark:text-white/60">{p.slug}</td>
+                      <td className="px-4 py-3 text-slate-700 dark:text-white/70">{catName}</td>
+                      <td className="px-4 py-3 text-right text-slate-900 dark:text-white">{p.price?.toFixed(2)} {p.currency || "TRY"}</td>
+                      <td className="px-4 py-3 text-right text-slate-900 dark:text-white">{p.stock}</td>
                       <td className="px-4 py-3">
                         <div className="flex justify-end gap-2">
                           <Button
                             size="icon"
                             variant="ghost"
-                            className="text-white/70 hover:text-white"
+                            className="text-slate-700 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"
                             onClick={() => {
                               setSelected(p)
                               setEditOpen(true)
@@ -176,7 +179,66 @@ export default function Products() {
                   )
                 })}
               </tbody>
-            </table>
+              </table>
+              </div>
+
+              {/* Mobile view */}
+              <div className="md:hidden space-y-3 p-4">
+                {rows.map((p) => {
+                  const catName =
+                    typeof p.categoryId === "string"
+                      ? p.categoryId
+                      : p.categoryId?.name || "—"
+
+                  return (
+                    <div
+                      key={p._id}
+                      className="p-4 rounded-xl border border-purple-200/30 dark:border-white/10 bg-purple-50 dark:bg-white/5 hover:bg-purple-100 dark:hover:bg-white/10 transition cursor-pointer"
+                      onClick={() => {
+                        setSelected(p)
+                        setEditOpen(true)
+                      }}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <div className="font-semibold text-slate-900 dark:text-white truncate">{p.title}</div>
+                          <div className="text-xs text-slate-600 dark:text-white/60 truncate mt-1">{p.slug}</div>
+                          <div className="text-xs text-slate-600 dark:text-white/60 mt-1">Kategori: {catName}</div>
+                        </div>
+                        <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setSelected(p)
+                              setEditOpen(true)
+                            }}
+                            className="p-1.5 hover:bg-purple-200 dark:hover:bg-white/20 rounded-lg transition"
+                          >
+                            <Pencil className="h-4 w-4 text-slate-700 dark:text-white/70" />
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setDelTarget(p)
+                              setDelOpen(true)
+                            }}
+                            className="p-1.5 hover:bg-red-100 dark:hover:bg-red-500/20 rounded-lg transition"
+                          >
+                            <Trash2 className="h-4 w-4 text-red-400" />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between text-xs border-t border-purple-200/30 dark:border-white/10 pt-3">
+                        <div className="space-y-1">
+                          <div><span className="text-slate-600 dark:text-white/60">Fiyat:</span> <span className="font-semibold text-slate-900 dark:text-white">{p.price} TRY</span></div>
+                          <div><span className="text-slate-600 dark:text-white/60">Stok:</span> <span className="font-semibold text-slate-900 dark:text-white">{p.stock}</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </>
           )}
         </CardContent>
       </Card>

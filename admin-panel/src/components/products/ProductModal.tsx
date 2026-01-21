@@ -176,12 +176,12 @@ export default function ProductModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="bg-[#0f1026] border-white/10">
+      <DialogContent className="rounded-3xl md:rounded-2xl bg-white dark:bg-[#0f1026] border-purple-200/40 dark:border-white/10 max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-white">
+          <DialogTitle className="text-slate-900 dark:text-white">
             {isEdit ? "Ürünü Düzenle" : "Yeni Ürün"}
           </DialogTitle>
-          <DialogDescription className="text-white/60">
+          <DialogDescription className="text-slate-600 dark:text-white/60">
             {isEdit ? "Ürün bilgilerini güncelleyin" : "Yeni ürün ekleyin"}
           </DialogDescription>
         </DialogHeader>
@@ -191,7 +191,7 @@ export default function ProductModal({
             placeholder="Ürün başlığı"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="bg-white/10 border-white/10 text-white placeholder:text-white/40"
+            className="bg-purple-50 dark:bg-white/10 border-purple-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-white/40"
           />
 
           <Input
@@ -200,7 +200,7 @@ export default function ProductModal({
             step="0.01"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="bg-white/10 border-white/10 text-white placeholder:text-white/40"
+            className="bg-purple-50 dark:bg-white/10 border-purple-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-white/40"
           />
 
           <Input
@@ -208,15 +208,15 @@ export default function ProductModal({
             inputMode="numeric"
             value={stock}
             onChange={(e) => setStock(e.target.value)}
-            className="bg-white/10 border-white/10 text-white placeholder:text-white/40"
+            className="bg-purple-50 dark:bg-white/10 border-purple-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-white/40"
           />
 
           <div className="space-y-1">
-            <div className="text-xs text-white/60">Para Birimi</div>
+            <div className="text-xs text-slate-600 dark:text-white/60">Para Birimi</div>
             <select
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
-              className="w-full rounded-xl bg-white/10 border border-white/10 px-3 py-2 text-white outline-none"
+              className="w-full rounded-xl bg-purple-50 dark:bg-white/10 border border-purple-200 dark:border-white/10 px-3 py-2 text-slate-900 dark:text-white outline-none"
             >
               <option value="TRY" className="text-black">TRY (₺)</option>
               <option value="USD" className="text-black">USD ($)</option>
@@ -225,17 +225,17 @@ export default function ProductModal({
           </div>
 
           <div className="space-y-2">
-            <div className="text-xs text-white/60">Görseller (İsteğe Bağlı)</div>
-            <div className="rounded-lg bg-white/5 border border-white/10 p-3 text-xs text-white/50">
-              <div className="font-semibold text-white/60 mb-2">Kurallar:</div>
-              <ul className="space-y-1 list-disc list-inside">
+            <div className="text-xs text-slate-600 dark:text-white/60">Görseller (İsteğe Bağlı)</div>
+            <div className="rounded-lg bg-purple-50 dark:bg-white/5 border border-purple-200 dark:border-white/10 p-3 text-xs text-slate-600 dark:text-white/50">
+              <div className="font-semibold text-slate-600 dark:text-white/60 mb-2">Kurallar:</div>
+              <ul className="space-y-1 list-disc list-inside text-slate-600 dark:text-white/60">
                 <li>Formatlar: JPEG, PNG, WebP, GIF</li>
                 <li>Max dosya boyutu: 5MB</li>
                 <li>Max 5 görsel aynı anda</li>
               </ul>
             </div>
-            <label className="flex items-center justify-center w-full px-4 py-2 border-2 border-dashed border-white/20 rounded-xl cursor-pointer hover:border-white/40 transition">
-              <span className="text-sm text-white/60">Görselleri seçin (max 5)</span>
+            <label className="flex items-center justify-center w-full px-4 py-2 border-2 border-dashed border-purple-200 dark:border-white/20 rounded-xl cursor-pointer hover:border-purple-300 dark:hover:border-white/40 transition">
+              <span className="text-sm text-slate-600 dark:text-white/60">Görselleri seçin (max 5)</span>
               <input
                 type="file"
                 multiple
@@ -269,11 +269,11 @@ export default function ProductModal({
           </div>
 
           <div className="space-y-1">
-            <div className="text-xs text-white/60">Kategori</div>
+            <div className="text-xs text-slate-600 dark:text-white/60">Kategori</div>
             <select
               value={categoryId}
               onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full rounded-xl bg-white/10 border border-white/10 px-3 py-2 text-white outline-none"
+              className="w-full rounded-xl bg-purple-50 dark:bg-white/10 border border-purple-200 dark:border-white/10 px-3 py-2 text-slate-900 dark:text-white outline-none"
             >
               <option value="">Kategori seç (opsiyonel)</option>
               {cats.map((c) => (
@@ -285,19 +285,19 @@ export default function ProductModal({
           </div>
 
           {err && (
-            <div className="rounded-xl border border-pink-500/25 bg-pink-500/10 p-3 text-sm text-pink-100/90 whitespace-pre-wrap">
+            <div className="rounded-xl border border-red-500/25 bg-red-500/10 p-3 text-sm text-red-600 dark:text-red-200/90 whitespace-pre-wrap">
               {err}
             </div>
           )}
 
           <div className="flex justify-end gap-2">
-            <Button type="button" variant="ghost" onClick={onClose} disabled={loading || uploading}>
+            <Button type="button" className="flex-1 border-2 border-slate-300 dark:border-white/20 text-slate-900 dark:text-white bg-slate-50 dark:bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 rounded-xl hover:scale-95 hover:shadow-lg transition-all duration-200" onClick={onClose} disabled={loading || uploading}>
               İptal
             </Button>
             <Button
               type="submit"
               disabled={loading || uploading || !title.trim() || !price.trim() || !stock.trim()}
-              className="bg-gradient-to-r from-purple-500 via-fuchsia-500 to-cyan-400 text-white"
+              className="flex-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-cyan-400 text-white rounded-xl hover:shadow-lg hover:scale-95 transition-all duration-200"
             >
               {loading ? "Kaydediliyor..." : "Kaydet"}
             </Button>
